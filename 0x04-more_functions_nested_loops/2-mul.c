@@ -3,9 +3,10 @@
 /**
  * mul - multiplies two integers
  *
- * @c: takes input
+ * @a: first input
+ * @b: second input
  *
- * Return: product
+ * Return: product of a and b
 */
 
 int mul(int a, int b)
