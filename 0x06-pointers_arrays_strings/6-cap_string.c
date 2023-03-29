@@ -1,6 +1,5 @@
 /**
- * cap_string - a function that capitalizes
- *              all words of a string
+ * cap_string - capitalizes all words of a string
  *
  * @s: pointer to char input array
  *
