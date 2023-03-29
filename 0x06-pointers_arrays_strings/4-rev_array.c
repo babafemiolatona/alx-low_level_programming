@@ -3,11 +3,11 @@
 /**
  * reverse_array - reverses the content of an array of integers
  *
- * @a: First input parameter
+ * @a: pointer to int array
  *
- * @n: Second input parameter
+ * @n: number of elements to swap
  *
- * Return: Always 0 (Success)
+ * Return: nothing
  */
 
 void reverse_array(int *a, int n)

@@ -3,13 +3,13 @@
 /**
  * *_strncpy - copies a string
  *
- * @dest: First input parameter
+ * @dest: pointer to destination input buffer
  *
- * @src: Second input parameter
+ * @src: pointer to source input buffer
  *
- * @n: Third input parameter
+ * @n: bytes of @src
  *
- * Return: Always 0 (Success)
+ * Return: @dest
  */
 
 char *_strncpy(char *dest, char *src, int n)

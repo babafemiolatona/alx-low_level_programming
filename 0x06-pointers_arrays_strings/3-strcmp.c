@@ -3,11 +3,17 @@
 /**
  * _strcmp - compares two strings
  *
- * @s1: First input parameter
+ * @s1: pointer to first input
  *
- * @s2: Second input parameter
+ * @s2: pointer to second input
  *
- * Return: Always 0 (Success)
+ * Return: 0 if s1 and s2 are equal
+ *        negative integer if the stopping character
+ *                in @s1 was less than the stopping
+ *                character in @s2
+ *        positive integer if the stopping character
+ *                in @s1 was greater than the stopping
+ *                character in @s2
  */
 
 int _strcmp(char *s1, char *s2)

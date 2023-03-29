@@ -3,11 +3,11 @@
 /**
  * *_strcat - concatenates two strings
  *
- * @dest: First input parameter
+ * @dest: pointer to destination input
  *
- * @src: Second input parameter
+ * @src: pointer to source input
  *
- * Return: Always 0 (Success)
+ * Return: pointer to resulting string
 */
 
 char *_strcat(char *dest, char *src)

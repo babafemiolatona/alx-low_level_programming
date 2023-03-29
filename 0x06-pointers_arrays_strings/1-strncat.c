@@ -3,13 +3,13 @@
 /**
  * *_strncat - concatenates two strings
  *
- * @dest: First input parameter
+ * @dest: pointer to destination input
  *
- * @src: Second input parameter
+ * @src: pointer to source input
  *
- * @n: Third input parameter
+ * @n: most number of bytes from @src
  *
- * Return: Always 0 (Success)
+ * Return: @dest
  */
 
 char *_strncat(char *dest, char *src, int n)
