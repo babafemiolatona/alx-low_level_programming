@@ -3,16 +3,17 @@
 /**
  * _puts_recursion - prints a string, followed by a new line.
  *
- * @s: the string to be printed.
+ * @s: pointer to the string.
  *
- * Return: nothing
+ * Return: void
  */
 
 void _puts_recursion(char *s)
 {
-	while (*s != '\0')
+	if (*s == '\0')
 	{
-		putchar(*s++);
+		_putchar('\n');
 	}
-	putchar('\n');
+	_putchar(*s);
+	_puts_recursion(s + 1);
 }
