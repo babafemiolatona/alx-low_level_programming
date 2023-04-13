@@ -1,25 +1,72 @@
 #include "main.h"
 #include <stdlib.h>
-#include <string.h>
 
 /**
- * _calloc - allocates memory for an array
- *
- * @nmemb: number of elements in the array
- * @size: size of each element in bytes
- *
- * Return: a pointer to the allocated memory, or NULL if allocation fails
+ * *_memset - fills memory with a constant byte.
+ * @s: pointer to put the constant
+ * @b: constant
+ * @n: max bytes to use
+ * Return: s
  */
 
+char *_memset(char *s, char b, unsigned int n)
+{
+	char *ptr = s;
+
+	while (n--)
+		*s++ = b;
+
+	return (ptr);
+}
+
+/**
+ * mul - Multiply a and b
+ *
+ * Description: Performs Overflow and zero checks
+ *
+ * @a: first value
+ * @b: second value
+ *
+ * Return: multiplication result or -1 when it
+ * fails check
+ */
+int mul(unsigned int a, unsigned int b)
+{
+	unsigned int x = a * b;
+
+	if ((a != 0 && x / a != b) || (a == 0) || (b == 0))
+	{
+		return (-1);
+	}
+	return (x);
+}
+
+/**
+ * _calloc - allocates memory for an
+ * array of nmemb of size bytes each
+ *
+ * Description: Check for integer overflow
+ *
+ * @nmemb: amount of contiguous memory blocks
+ * @size: size of each block in bytes
+ *
+ * Return: memory address if success or
+ * NULL if failed
+ */
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
-	unsigned int total_size = nmemb * size;
-	void *ptr = malloc(total_size);
+	int res = mul(nmemb, size);
+	void *mem;
 
-	if (ptr == NULL)
-	{
+	if (res == -1)
 		return (NULL);
-	}
-	memset(ptr, 0, total_size);
-	return (ptr);
+
+	mem = malloc(res);
+
+	if (mem == NULL)
+		return (NULL);
+
+	_memset(mem, 0, res);
+
+	return (mem);
 }
