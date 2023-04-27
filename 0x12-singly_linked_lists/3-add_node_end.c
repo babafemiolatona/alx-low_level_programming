@@ -1,45 +1,48 @@
 #include "lists.h"
 
 /**
- * add_node_end - adds a new node at the end of a list_t list
+ * find_tail - find the tail of the
+ * linked list.
  *
- * @head: pointer to a pointer to the head of the list
+ * @node: node
  *
- * @str: string to be added to the new node
- *
- * Return: address of the new element or NULL if it failed
+ * Return: address of the tail node
  */
+list_t *find_tail(list_t *node)
+{
+	if (node->next == NULL)
+		return (node);
 
+	return (find_tail(node->next));
+}
+
+/**
+ * add_node_end - add a new node to the
+ * linked list (append)
+ *
+ * @head: node
+ * @str: string
+ *
+ * Return: address of the new node
+ */
 list_t *add_node_end(list_t **head, const char *str)
 {
-	list_t *new_node, *temp;
+	list_t *new = malloc(sizeof(list_t));
+	int len = 0;
 
-	new_node = malloc(sizeof(list_t));
-
-	if (new_node == NULL)
-	{
+	if (new == NULL)
 		return (NULL);
-	}
-	new_node->str = strdup(str);
 
-	if (new_node->str == NULL)
-	{
-		free(new_node);
-		return (NULL);
-	}
-	new_node->next = NULL;
+	for (; str[len] != '\0'; len++)
+		;
 
-	if (*head == NULL)
-	{
-		*head = new_node;
-		return (new_node);
-	}
-	temp = *head;
+	new->str = strdup(str);
+	new->len = len;
 
-	while (temp->next != NULL)
-	{
-		temp = temp->next;
-	}
-	temp->next = new_node;
-	return (new_node);
+	if (*head != NULL)
+		find_tail(*head)->next = new;
+	else
+		*head = new;
+
+	return (new);
 }
