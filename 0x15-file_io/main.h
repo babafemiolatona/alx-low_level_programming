@@ -8,6 +8,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <elf.h>
+#include <sys/stat.h>
 
 #if defined(__LP64__)
 #define ElfW(type) Elf64_##type
