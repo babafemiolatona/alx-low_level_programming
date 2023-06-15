@@ -1,56 +1,89 @@
-#include <stdlib.h>
 #include "lists.h"
 
 /**
- * insert_dnodeint_at_index - inserts a new node at a given
- * position in a dlistint_t linked list
- * @h: pointer to the pointer to the head of the linked list
- * @idx: index of the list where the new node should be added.
- * Index starts at 0
- * @n: value to be stored in the new node.
- *
- * Return: address of the new node, or NULL if it failed
- */
+  * listint_len - return the number of elements in linked list
+  * @h: pointer to the linked list
+  * Return: number of elements
+  */
+size_t listint_len(const dlistint_t *h)
+{
+	int count = 0;
 
+	while (h != NULL)
+	{
+		count++;
+		h = h->next;
+	}
+	return (count);
+}
+
+/**
+ * get_dnodeint_at_index - return nth nod of a double linked list
+ * @head: head pointer
+ * @index: node index to be found
+ * Return: nth node
+ */
+dlistint_t *get_dnodeint_at_index(dlistint_t *head, unsigned int index)
+{
+	size_t count = 0;
+
+	if (head == NULL)
+		return (NULL);
+	while (head != NULL)
+	{
+		if (count == index)
+			return (head);
+		count++;
+		head = head->next;
+	}
+	return (NULL);
+}
+
+/**
+ * insert_dnodeint_at_index - insert a new node at a given position
+ * @h: pointer to head pointer
+ * @idx: index to be found
+ * @n: number to be inserted
+ * Return: address of newnode, NULL if failed
+ */
 dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
-	dlistint_t *new_node, *current;
-	unsigned int count = 0;
+	dlistint_t *newnode = NULL;
+	dlistint_t *nthnode = NULL;
+	size_t count;
 
+	count = listint_len(*h);
 	if (h == NULL)
-	{
 		return (NULL);
-	}
-
+	if (*h == NULL && idx != 0)
+		return (NULL);
+	newnode = malloc(sizeof(*newnode));
+	if (newnode == NULL)
+		return (NULL);
 	if (idx == 0)
 	{
-		return (add_dnodeint(h, n));
+		newnode = add_dnodeint(h, n);
+		if (newnode == NULL)
+			return (NULL);
+		return (newnode);
 	}
-
-	current = *h;
-	while (current != NULL && count < idx - 1)
-	{
-		current = current->next;
-		count++;
-	}
-
-	if (current == NULL || current->next == NULL)
-	{
+	if (idx > count)
 		return (NULL);
-	}
-
-	new_node = malloc(sizeof(dlistint_t));
-
-	if (new_node == NULL)
+	nthnode = get_dnodeint_at_index(*h, idx);
+	newnode->n = n;
+	if (idx == count)
 	{
-		return (NULL);
+		newnode = add_dnodeint_end(h, n);
+		if (newnode == NULL)
+			return (NULL);
+		return (newnode);
 	}
+	if (nthnode == NULL)
+		return (NULL);
+	newnode->prev = nthnode->prev;
+	nthnode->prev->next = newnode;
+	newnode->next = nthnode;
+	nthnode->prev = newnode;
 
-	new_node->n = n;
-	new_node->prev = current;
-	new_node->next = current->next;
-	current->next->prev = new_node;
-	current->next = new_node;
-
-	return (new_node);
+	return (newnode);
 }
