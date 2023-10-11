@@ -3,7 +3,8 @@
 /**
  * _binary_search - searches for a value in a sorted array of integers
  * @array: pointer to the first element of the array to search in
- * @size: number of elements in array
+ * @left: starting index of sub array to serach
+ * @right: ending index of sub array to search
  * @value: value to search for
  * Return: index where value is located
  */
